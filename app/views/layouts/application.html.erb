@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	  <title>Yoshi</title>
+	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+			<div class="container">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Yoshi Test Automation&nbsp;&nbsp;&nbsp;</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<% if session[:permission] != nil && session[:permission][0] == 1 %>
+					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<ul class="nav navbar-nav">
+							<li class="active"><a href="#">Test Planning</a></li>
+							<li><a href="#">Test Execution</a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Results <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Last Run</a></li>
+									<li><a href="#">By Project</a></li>
+									<li><a href="#">By Scenario</a></li>
+									<li class="divider"></li>
+									<li><a href="#">By Test Case</a></li>
+									<li class="divider"></li>
+									<li><a href="#">Query Database</a></li>
+								</ul>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+						<% if session[:permission][1] == 1 %>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><%= link_to 'Users', users_path %></li>
+								</ul>
+							</li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Config <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="#">Test Planning</a></li>
+									<li><a href="#">Test Execution</a></li>
+									<li><a href="#">Results</a></li>
+								</ul>
+							</li>
+						<% end %>
+							<li><i class="fa fa-user"></i> <%= session[:user_name] %></li>
+							<li>&nbsp;&nbsp;&nbsp;</li>
+							<li><i class="fa fa-power-off"> <%= link_to 'Logout', new_session_path %></i></li>
+						</ul>
+					</div><!-- /.navbar-collapse -->
+				<% end %>
+			</div><!-- /.container-fluid -->
+		</nav>
+    
+		<div class="container">
+			<% flash.each do |key, value| %>
+    		<div class="alert alert-<%= key %>"><%= value %></div>
+  		<% end %>
+			<%= yield %>
+		</div>
+	</body>
+</html>
