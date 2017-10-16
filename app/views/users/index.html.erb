@@ -10,7 +10,7 @@
 	        <div class="col col-xs-6">
 	          <h3 class="panel-title">User Admin</h3>
 	        </div>
-	        <div class="col col-xs-6 text-right">
+	        <div class="col col-xs-6 text-right" data-turbolinks="false">
 	        	<%= link_to "Create New", new_user_path, class: "btn btn-sm btn-primary" %>
 	        </div>
 	      </div>
@@ -27,12 +27,12 @@
 	          </tr> 
 	        </thead>
 	        <tbody>
-	          <tr>
-	            <td align="center">
-	              <a class="btn btn-default"><em class="fa fa-pencil"></em></a>
-	              <a class="btn btn-danger"><em class="fa fa-trash"></em></a>
-	            </td>
-	            <% @users.each do |user| %>
+	        	<% @users.each do |user| %>
+	          	<tr>
+	            	<td align="center">
+	            		<%= link_to raw('<em class="fa fa-pencil"></em>'), edit_user_path(user), class: "btn btn-default" %>
+	            		<%= link_to raw('<em class="fa fa-trash"></em>'), user_path(user), method: :delete, data: {confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+	            	</td>
 	            	<td class="hidden-xs"><%= user.user_id %></td>
 	            	<td><%= user.user_name %></td>
 	            	<td><%= user.user_email %></td>
@@ -41,8 +41,8 @@
 	            	<% else %>
 	            		<td>No</td>
 	            	<% end %>
-	            <% end %>
-	          </tr>
+	          	</tr>
+	          <% end %>
 	        </tbody>
 	      </table>
 	    </div>

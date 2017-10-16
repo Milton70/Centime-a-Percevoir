@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 		# Make sure we have a user-name or email
 		if params[:username] == nil || params[:username] == ""
 			flash[:error] = "No user name or email address entered. Please try again..."
-			render 'index' and return
+			render 'login' and return
 		end
 
 		# If we get here then check if it's an email or a user name
@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
 		# See if it's valid or not
 		if user == nil || user == ""
 			flash[:error] = "Sorry but the user name or email does not exist. Please try again or contact your administrator."
-			render 'index' and return
+			render 'login' and return
 		end
 
 		# If it's valid, check it's the correct password
@@ -45,7 +45,7 @@ class SessionsController < ApplicationController
 			render 'splash' and return
 		else
 			flash[:error] = "Sorry but your password doesn't appear to be correct. Please try again or contact administration."
-			render 'index' and return
+			render 'login' and return
 		end
 
 	end
@@ -53,6 +53,10 @@ class SessionsController < ApplicationController
 	def new
 		reset_session
 		render 'login' and return
+	end
+
+	def change_password
+binding.pry
 	end
 
 end
