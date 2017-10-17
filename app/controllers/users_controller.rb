@@ -1,12 +1,22 @@
 class UsersController < ApplicationController
 
 	def index
-		@users = User.all
+		if session[:permission] == [1,1]
+			@users = User.all
+		else
+			flash[:error] = "Sorry but you do not have access to the 'Users' module. Please speak to an administrator if you need elevated priviledges." 
+			redirect_to '/sessions'
+		end
 	end
 
 	def new
-		@user 	= User.new
-		@roles	= Role.all
+		if session[:permission] == [1,1]
+			@user 	= User.new
+			@roles	= Role.all
+		else
+			flash[:error] = "Sorry but you do not have access to the 'Users' module. Please speak to an administrator if you need elevated priviledges." 
+			redirect_to '/sessions'
+		end
 	end
 
 	def create
@@ -25,7 +35,12 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		@user = User.find(params[:id])
+		if session[:permission] == [1,1]
+			@user = User.find(params[:id])
+		else
+			flash[:error] = "Sorry but you do not have access to the 'Users' module. Please speak to an administrator if you need elevated priviledges." 
+			redirect_to '/sessions'
+		end
 	end
 
 	def update
@@ -41,10 +56,14 @@ class UsersController < ApplicationController
 	end
 
 	def destroy
-		@user = User.find(params[:id])
-		@user.destroy
-
-		redirect_to action: :index
+		if session[:permission] == [1,1]
+			@user = User.find(params[:id])
+			@user.destroy
+			redirect_to action: :index
+		else
+			flash[:error] = "Sorry but you do not have access to the 'Users' module. Please speak to an administrator if you need elevated priviledges." 
+			redirect_to '/sessions'
+		end
 	end
 
 	private

@@ -36,13 +36,18 @@ class SessionsController < ApplicationController
 		# If it's valid, check it's the correct password
 		if user && user.authenticate(params[:password])	
 			session[:user_name] = user.user_name
-			# See if Admin or not
-			if user.roles[0].role_name == "Admin"
-				session[:permission] = [1, 1]
+			if params[:password] == 'password'
+				@user = user.id
+				render 'change_password' and return
 			else
-				session[:permission] = [1, 0]
+				# See if Admin or not
+				if user.roles[0].role_name == "Admin"
+					session[:permission] = [1, 1]
+				else
+					session[:permission] = [1, 0]
+				end
+				render 'splash' and return
 			end
-			render 'splash' and return
 		else
 			flash[:error] = "Sorry but your password doesn't appear to be correct. Please try again or contact administration."
 			render 'login' and return
@@ -55,8 +60,17 @@ class SessionsController < ApplicationController
 		render 'login' and return
 	end
 
-	def change_password
-binding.pry
+	def update_password
+		user = User.find(params[:id])
+		user.password = params[:password]
+		user.save	
+		# See if Admin or not
+		if user.roles[0].role_name == "Admin"
+			session[:permission] = [1, 1]
+		else
+			session[:permission] = [1, 0]
+		end
+		render 'splash' and return
 	end
 
 end
