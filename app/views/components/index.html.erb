@@ -1,0 +1,53 @@
+<title>
+	Administer Components
+</title>
+
+<div class="container">    
+	<div class="col-md-10 col-md-offset-1">
+	  <div class="panel panel-default panel-table">
+	    <div class="panel-heading">
+	      <div class="row">
+	        <div class="col col-xs-6">
+	          <h3 class="panel-title">Component Admin</h3>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="panel-body">
+	      <div id="comp_folders"> 	
+	      	<ul>
+	      		<li><%= @root_folder.folder_name %>
+	      			<ul>
+	      				<% @root_folder.children.each do |child| %>
+	      					<li><%= child.folder_name %>    			
+	      						<% if child.component_details.count > 0 %>
+	      							<ul>
+	      								<% child.component_details.each do |child_comp| %>
+	      									<li><%= child_comp.component_name %></li>
+	      								<% end %>
+	      							</ul>
+	      						<% end %>		
+	      					<% if child.children.count > 0 %>
+	      						<ul>	
+	      							<% child.children.each do |kid| %>      							
+	      								<li><%= kid.folder_name %>
+	      									<% if kid.component_details.count > 0 %>
+	      										<ul>
+	      											<% kid.component_details.each do |kid_comp| %>
+	      												<li data-jstree='{"icon":"fa fa-puzzle-piece"}'><%= kid_comp.component_name %></li>
+	      											<% end %>
+	      										</ul>
+	      									<% end %>
+	      								</li>
+	      							<% end %>
+	      						</ul>
+	      					<% end %>
+	      					</li>
+	      				<% end %>
+	      			</ul>
+	      		</li>
+	      	</ul>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>

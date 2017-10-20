@@ -60,6 +60,14 @@ class SessionsController < ApplicationController
 		render 'login' and return
 	end
 
+	def forgot_password
+binding.pry
+	end
+
+	def update_password
+binding.pry
+	end
+
 	def update_password
 		user = User.find(params[:id])
 		user.password = params[:password]

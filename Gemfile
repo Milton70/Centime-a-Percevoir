@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.8'
 # Use sqlite3 as the database for Active Record
@@ -27,6 +26,8 @@ gem 'twitter-bootstrap-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap-form'
 gem 'font-awesome-rails'
+gem 'ancestry'
+gem 'jstree-rails-4'
 
 group :development, :test do
   gem 'pry'

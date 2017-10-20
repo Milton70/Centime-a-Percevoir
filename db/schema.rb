@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009121015) do
+ActiveRecord::Schema.define(version: 20171019124703) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -22,6 +22,36 @@ ActiveRecord::Schema.define(version: 20171009121015) do
 
   add_index "assignments", ["role_id"], name: "index_assignments_on_role_id"
   add_index "assignments", ["user_id"], name: "index_assignments_on_user_id"
+
+  create_table "component_details", force: :cascade do |t|
+    t.integer  "component_folder_id"
+    t.string   "component_name"
+    t.string   "component_id"
+    t.string   "component_param_1"
+    t.string   "component_param_2"
+    t.string   "component_param_3"
+    t.string   "component_param_4"
+    t.string   "component_param_5"
+    t.string   "component_param_6"
+    t.string   "component_param_7"
+    t.string   "component_param_8"
+    t.string   "component_param_9"
+    t.string   "component_param_10"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "component_details", ["component_folder_id"], name: "index_component_details_on_component_folder_id"
+
+  create_table "component_folders", force: :cascade do |t|
+    t.string   "folder_name"
+    t.string   "folder_description"
+    t.string   "ancestry"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "component_folders", ["ancestry"], name: "index_component_folders_on_ancestry"
 
   create_table "roles", force: :cascade do |t|
     t.string   "role_name"
