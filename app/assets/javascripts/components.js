@@ -47,16 +47,18 @@ jQuery(document).ready(function() {
 							"action"						: function (data) {
 								var inst 	= $.jstree.reference(data.reference),
 										obj 	= inst.get_node(data.reference);
-								console.log(obj);		
+								console.log(obj.parent);
+								console.log(obj.text);		
 								if ((obj.parent != '#') && (obj.text.indexOf("Projects") != 0 ) && (obj.text.indexOf("Misc") != 0 )) {
-									//$.ajax( {
-									//	url: "/components/" + data.node.id,
-									//	type: "DELETE",
-									//	data: { parent_id: data.node.parent, component_name: data.node.text },
-									//});
 									inst.delete_node(obj);
 								} else {
-									alert("Sorry but you cannot delete this node!");
+									if ((obj.text.indexOf("Projects") == 0) && (obj.text.replace(/\s/g,'').length > 8)) {
+										inst.delete_node(obj);
+									} else if ((obj.text.indexOf("Misc") == 0) && (obj.text.replace(/\s/g,'').length > 4)) {
+										inst.delete_node(obj);
+									}	else {
+										alert("Sorry but you cannot delete this node!");
+									}
 								}
 							}
 						}
@@ -78,7 +80,7 @@ jQuery(document).ready(function() {
    	} 
 
    	alert(parent_icon);
-   	
+
 		$.ajax( {
 			url: "/components/" + data.node.id,
 			type: "DELETE",
@@ -99,6 +101,10 @@ jQuery(document).ready(function() {
    		parent_icon = 'folder';
    	} 
 
+   	alert("The Parent is " + parent_name);
+   	alert("The Parent Icon is " + parent_icon);
+   	alert(data.node.icon);
+
 		var inst = $("#comp_folders").jstree(data.reference);
 
 		if (data.node.icon == 'fa fa-puzzle-piece') {
@@ -112,9 +118,6 @@ jQuery(document).ready(function() {
 				alert("Sorry but you cannot add Components to the Misc node!");
 				inst.delete_node(data.node);
 			} else if (parent_icon == 'component') {
-				alert("Sorry but you cannot add children to component nodes!");
-				inst.delete_node(data.node);
-			} else if (parent_icon == 'folder') {
 				alert("Sorry but you cannot add children to component nodes!");
 				inst.delete_node(data.node);
 			} else {

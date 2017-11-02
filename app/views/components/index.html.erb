@@ -15,36 +15,7 @@
 	    <div class="panel-body">
 	      <div id="comp_folders"> 	
 	      	<ul>
-	      		<li data-jstree='{"icon":"fa fa-folder-open-o"}'><%= @root_folder.folder_name %>
-	      			<ul>
-	      				<% @root_folder.children.each do |child| %>
-	      					<li data-jstree='{"icon":"fa fa-folder-open-o"}'><%= child.folder_name %>    			
-	      						<% if child.component_details.count > 0 %>
-	      							<ul>
-	      								<% child.component_details.each do |child_comp| %>
-	      									<li data-jstree='{"icon":"fa fa-puzzle-piece"}'><%= child_comp.component_name %></li>
-	      								<% end %>
-	      							</ul>
-	      						<% end %>		
-	      					<% if child.children.count > 0 %>
-	      						<ul>	
-	      							<% child.children.each do |kid| %>      							
-	      								<li data-jstree='{"icon":"fa fa-folder-open-o"}'><%= kid.folder_name %>
-	      									<% if kid.component_details.count > 0 %>
-	      										<ul>
-	      											<% kid.component_details.each do |kid_comp| %>
-	      												<li data-jstree='{"icon":"fa fa-puzzle-piece"}'><%= kid_comp.component_name %></li>
-	      											<% end %>
-	      										</ul>
-	      									<% end %>
-	      								</li>
-	      							<% end %>
-	      						</ul>
-	      					<% end %>
-	      					</li>
-	      				<% end %>
-	      			</ul>
-	      		</li>
+	      		<%= build_tree_view(@root_folder, '') %>
 	      	</ul>
 	      </div>
 	    </div>

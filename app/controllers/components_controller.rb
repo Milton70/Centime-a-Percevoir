@@ -48,8 +48,9 @@ binding.pry
 	def destroy
 binding.pry		
 		# See if we can find the object in components first
-		obj = ComponentDetail.find_by(component_id: params[:id])
-		if obj == nil
+		obj = ComponentDetail.find_by(component_name: params[:component_name])
+		if obj != nil
+			obj.destroy
 		else
 			# See if we can find it as a folder
 			obj = ComponentFolder.find_by(folder_description: params[:id])
