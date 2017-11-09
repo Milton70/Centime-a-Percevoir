@@ -1,5 +1,5 @@
 
-jQuery(document).ready(function() {
+document.addEventListener("turbolinks:load", function() {
 
 	$("#comp_folders").jstree( {	
 			"core": {"check_callback": true },
@@ -26,10 +26,25 @@ jQuery(document).ready(function() {
 								tree.edit($node);
 							}
 						},
+						"edit": {
+							"separator_before" 	: false,
+							"separator_after"		: false,
+							"label"							: "Edit Component",
+							"action"						: function (data) {
+								var inst 	= $.jstree.reference(data.reference),
+										obj 	= inst.get_node(data.reference);
+								
+								if (obj.icon == 'fa fa-folder-open-o') {
+									alert("Sorry but you can only edit components!");
+								}	else {
+									window.location = '/components/' + obj.text
+								}
+							}
+						},
 						"rename": {
 							"separator_before" 	: false,
 							"separator_after"		: false,
-							"label"							: "Rename",
+							"label"							: "Rename node",
 							"action"						: function (data) {
 								var inst 	= $.jstree.reference(data.reference),
 										obj 	= inst.get_node(data.reference);
@@ -47,18 +62,21 @@ jQuery(document).ready(function() {
 							"action"						: function (data) {
 								var inst 	= $.jstree.reference(data.reference),
 										obj 	= inst.get_node(data.reference);
-								console.log(obj.parent);
-								console.log(obj.text);		
-								if ((obj.parent != '#') && (obj.text.indexOf("Projects") != 0 ) && (obj.text.indexOf("Misc") != 0 )) {
-									inst.delete_node(obj);
-								} else {
-									if ((obj.text.indexOf("Projects") == 0) && (obj.text.replace(/\s/g,'').length > 8)) {
+								var x = confirm("Are you sure you want to delete this node?");
+								if (x) {
+									if ((obj.parent != '#') && (obj.text.indexOf("Projects") != 0 ) && (obj.text.indexOf("Misc") != 0 )) {
 										inst.delete_node(obj);
-									} else if ((obj.text.indexOf("Misc") == 0) && (obj.text.replace(/\s/g,'').length > 4)) {
-										inst.delete_node(obj);
-									}	else {
-										alert("Sorry but you cannot delete this node!");
+									} else {
+										if ((obj.text.indexOf("Projects") == 0) && (obj.text.replace(/\s/g,'').length > 8)) {
+											inst.delete_node(obj);
+										} else if ((obj.text.indexOf("Misc") == 0) && (obj.text.replace(/\s/g,'').length > 4)) {
+											inst.delete_node(obj);
+										}	else {
+											alert("Sorry but you cannot delete this node!");
+										}
 									}
+								} else {
+									return false;
 								}
 							}
 						}
@@ -79,8 +97,6 @@ jQuery(document).ready(function() {
    		parent_icon = 'folder';
    	} 
 
-   	alert(parent_icon);
-
 		$.ajax( {
 			url: "/components/" + data.node.id,
 			type: "DELETE",
@@ -100,11 +116,6 @@ jQuery(document).ready(function() {
    	if (obj_parent_icon[1].indexOf('fa-folder-open-o') != -1) {
    		parent_icon = 'folder';
    	} 
-
-   	alert("The Parent is " + parent_name);
-   	alert("The Parent Icon is " + parent_icon);
-   	alert(data.node.icon);
-
 		var inst = $("#comp_folders").jstree(data.reference);
 
 		if (data.node.icon == 'fa fa-puzzle-piece') {
@@ -183,4 +194,38 @@ jQuery(document).ready(function() {
     }
   }
 	
+});
+
+var parm = 1;
+function parameter_fields() {
+  parm ++;
+
+  if (document.getElementsByTagName('button').length < 11) { 
+  	var objTo = document.getElementById('parameter_fields')
+  	var divtest = document.createElement("div");
+		divtest.setAttribute("class", "form-group removeclass" + parm);
+		var rdiv = 'removeclass' + parm;
+  	divtest.innerHTML = '<div class="col-md-5 nopadding"><div class="form-group"><input type="text" class="form-control" id="param_key" name="param_keys[]" value="" placeholder="parameter key e.g. file_name"></div></div><div class="col-md-5 nopadding"><div class="form-group"><input type="text" class="form-control" id="param_value" name="param_values[]" value="" placeholder="parameter value e.g. OPF_20171101_SCT"></div></div><div class="col-md-2 nopadding"><button class="btn btn-danger" type="button"  onclick="remove_parameter_fields('+ parm +');"><i class="fa fa-minus" aria-hidden="true"></i></button></div></div><div class="clear"></div>';
+  
+  	objTo.appendChild(divtest)
+  } else {
+  	alert("Sorry but you can only add 10 parameters to a component");
+  	return false;
+  }
+}
+function remove_parameter_fields(rid) {
+   $('.removeclass' + rid).remove();
+}
+
+document.addEventListener("turbolinks:load", function() {
+	$("[id*='param_key']").editable({
+		success: function(response, newValue) {
+        if(response.status == 'error') return response.msg; //msg will be shown in editable form
+    }
+	});
+	$("[id*='param_value']").editable({
+		success: function(response, newValue) {
+        if(response.status == 'error') return response.msg; //msg will be shown in editable form
+    }
+	});
 });

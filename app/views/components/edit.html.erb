@@ -1,0 +1,41 @@
+<div class="container">
+	<div class="row">        
+	  <div class="col-md-12">
+    	<div class="row">
+    		<div class="col-sm-7 col-sm-offset-2">
+					<%= form_tag component_path(@component), method: 'patch' do %>
+		    		<div class="panel panel-default">
+		  				<div class="panel-heading text-center"><strong>Component [ <%= @component.component_name %> ]</strong></div>
+		  				<div class="panel-heading text-center">
+		  					Add Component Parameters
+		  					<span class="affix">
+		  						<%= submit_tag 'Commit', class: "btn btn-success" %>
+		  					</span>
+		  				</div>
+		  				<div class="panel-body fixed-panel">
+		  	  			<div id="parameter_fields"></div>
+		       			<div class="col-md-5 nopadding">
+		  						<div class="form-group">
+		    						<input type="text" class="form-control" id="param_key" name="param_keys[]" value="" placeholder="parameter key e.g. file_name">
+		  						</div>
+								</div>
+								<div class="col-md-5 nopadding">
+								  <div class="form-group">
+								    <input type="text" class="form-control" id="param_value" name="param_values[]" value="" placeholder="parameter value e.g. OPF_20171101_SCT">
+								  </div>
+								</div>
+								<div class="col-md-2 nopadding">
+								  <button class="btn btn-success" type="button"  onclick="parameter_fields();"> 
+								  	<i class="fa fa-plus" aria-hidden="true"></i> 
+								  </button>
+		      			</div>
+								<div class="clear"></div>
+		        	</div>
+		        </div>
+		      <% end %>
+	      </div>
+      </div>
+    </div>
+  </div>
+</div>      
+    		

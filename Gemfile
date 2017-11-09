@@ -28,6 +28,7 @@ gem 'bootstrap-form'
 gem 'font-awesome-rails'
 gem 'ancestry'
 gem 'jstree-rails-4'
+gem 'bootstrap-x-editable-rails'
 
 group :development, :test do
   gem 'pry'

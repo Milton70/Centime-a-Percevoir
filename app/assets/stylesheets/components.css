@@ -1,0 +1,10 @@
+.affix {
+    top:105px;
+    right: 355px;
+    position:fixed;
+}
+
+.fixed-panel {
+  height: 450px;
+  overflow-y: scroll;
+}
