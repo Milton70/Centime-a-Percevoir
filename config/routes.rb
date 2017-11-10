@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   post  'sessions/change_password/:id'  => 	'sessions#update_password',	as: 'update_password'
 
   post  'components/:id'								=>  'components#edit_param', 		as: 'edit_param'
+  get 	'components/add_param/:id',			to: 'components#add_param', 		as: 'add_param'
 
 end

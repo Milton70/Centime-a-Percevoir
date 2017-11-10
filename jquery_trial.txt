@@ -1,0 +1,20 @@
+function add_parameter_field(comp_id) {
+	var rtn_val;
+	$.post("/components/" + comp_id,
+		{
+			component_action: 'next_param',
+		},
+		function(response, value) {
+			if (value != 'success') {
+				return false;
+			} else {
+				rtn_val = response.value
+				add_field(rtn_val, comp_id);
+			}
+		}
+	);
+}
+function add_field(rtn_val, comp_id) {
+	var markup = "<tr><td align='center'><em onclick='delete_parameter_fields(" + rtn_val + "," + comp_id + ");' class='fa fa-trash btn btn-danger'></em></td><td><a class='editable editable-click' id='param_key_" + rtn_val + "' href='#' data-type='text' data-pk='" + comp_id + "' data-url='/components/" + comp_id + "' data-title='New Key'>Empty</a></td><td><a class='editable editable-click' href='#' id='param_value_" + rtn_val + "' data-type='text' data-pk='"+ comp_id + "' data-url='/components/" + comp_id + "' data-title='New Value'>Empty</a></td></tr>"
+	$("table tbody").append(markup);
+}

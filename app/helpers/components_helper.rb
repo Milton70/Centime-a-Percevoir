@@ -58,61 +58,61 @@ module ComponentsHelper
 			case x
 			 	when 0
 			 		if component.component_param_1 != nil &&  component.component_param_1 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(1, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_1' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_1.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_1' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_1.split(':')[1]}</a></td></tr>"
 			 		end
 			 	when 1
 			 		if component.component_param_2 != nil &&  component.component_param_2 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(2, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_2' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_2.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_2' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_2.split(':')[1]}</a></td></tr>"
 			 		end
 			 	when 2
 			 		if component.component_param_3 != nil &&  component.component_param_3 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(3, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_3' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_3.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_3' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_3.split(':')[1]}</a></td></tr>"
 			 		end
 			 	when 3
 			 		if component.component_param_4 != nil &&  component.component_param_4 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(4, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_4' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_4.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_4' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_4.split(':')[1]}</a></td></tr>"
 			 		end
 			 	when 4
 			 		if component.component_param_5 != nil &&  component.component_param_5 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(5, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_5' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_5.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_5' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_5.split(':')[1]}</a></td></tr>"
 			 		end
 				when 5
 					if component.component_param_6 != nil &&  component.component_param_6 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(6, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_6' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_6.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_6' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_6.split(':')[1]}</a></td></tr>"
 			 		end
 				when 6
 					if component.component_param_7 != nil &&  component.component_param_7 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(7, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_7' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_7.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_7' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_7.split(':')[1]}</a></td></tr>"
 			 		end
 				when 7
 					if component.component_param_8 != nil &&  component.component_param_8 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(8, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_8' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_8.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_8' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_8.split(':')[1]}</a></td></tr>"
 			 		end
 				when 8
 					if component.component_param_9 != nil &&  component.component_param_9 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(9, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_9' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_9.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_9' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_9.split(':')[1]}</a></td></tr>"
 			 		end
 				when 9
 					if component.component_param_10 != nil &&  component.component_param_10 != ""
-			 			html << "<tr><td align='center'><em class='fa fa-trash btn btn-danger'></em></td>"
+			 			html << "<tr><td align='center'><em onclick='delete_parameter_fields(10, #{component.id});' class='fa fa-trash btn btn-danger'></em></td>"
 			 			html << "<td><a href='#' id='param_key_10' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Key'>#{component.component_param_10.split(':')[0]}</a></td>"
 			 			html << "<td><a href='#' id='param_value_10' data-type='text' data-pk='#{component.id}' data-url='/components/#{component.id}' data-title='New Value'>#{component.component_param_10.split(':')[1]}</a></td></tr>"
 			 		end

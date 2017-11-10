@@ -195,7 +195,7 @@ document.addEventListener("turbolinks:load", function() {
   }
 	
 });
-
+//----------------------------------------------------------------------------------------------------------------------------------------------//
 var parm = 1;
 function parameter_fields() {
   parm ++;
@@ -203,22 +203,39 @@ function parameter_fields() {
   if (document.getElementsByTagName('button').length < 11) { 
   	var objTo = document.getElementById('parameter_fields')
   	var divtest = document.createElement("div");
+
 		divtest.setAttribute("class", "form-group removeclass" + parm);
-		var rdiv = 'removeclass' + parm;
   	divtest.innerHTML = '<div class="col-md-5 nopadding"><div class="form-group"><input type="text" class="form-control" id="param_key" name="param_keys[]" value="" placeholder="parameter key e.g. file_name"></div></div><div class="col-md-5 nopadding"><div class="form-group"><input type="text" class="form-control" id="param_value" name="param_values[]" value="" placeholder="parameter value e.g. OPF_20171101_SCT"></div></div><div class="col-md-2 nopadding"><button class="btn btn-danger" type="button"  onclick="remove_parameter_fields('+ parm +');"><i class="fa fa-minus" aria-hidden="true"></i></button></div></div><div class="clear"></div>';
-  
   	objTo.appendChild(divtest)
   } else {
   	alert("Sorry but you can only add 10 parameters to a component");
   	return false;
   }
 }
+//----------------------------------------------------------------------------------------------------------------------------------------------//
 function remove_parameter_fields(rid) {
    $('.removeclass' + rid).remove();
 }
-
+//----------------------------------------------------------------------------------------------------------------------------------------------//
+function delete_parameter_fields(param_ele, comp_id) {
+	$("#param_key_" + param_ele).parents("tr").remove();
+	$.post("/components/param_key_" + param_ele,
+	{
+		component_id: comp_id,
+		component_action: 'delete_param'
+	},
+	function(response, newValue) {
+        if(response.status == 'error') return response.msg; //msg will be shown in editable form
+  });
+}
+//----------------------------------------------------------------------------------------------------------------------------------------------//
 document.addEventListener("turbolinks:load", function() {
 	$("[id*='param_key']").editable({
+		validate: function(newValue) {
+			if (newValue === null || newValue === '') {
+				return false;
+			}
+		},
 		success: function(response, newValue) {
         if(response.status == 'error') return response.msg; //msg will be shown in editable form
     }
@@ -229,3 +246,5 @@ document.addEventListener("turbolinks:load", function() {
     }
 	});
 });
+//----------------------------------------------------------------------------------------------------------------------------------------------//
+//----------------------------------------------------------------------------------------------------------------------------------------------//

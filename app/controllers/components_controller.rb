@@ -50,99 +50,171 @@ class ComponentsController < ApplicationController
 		@component = ComponentDetail.find_by(component_name: params[:id])
 	end
 
+	def add_param
+		@component = ComponentDetail.find(params[:id])
+		@param = ComponentDetail.return_next_available_parameter(@component)	
+	end
+
 	def edit_param
 
-		@component = ComponentDetail.find(params[:id])
-		x = params[:name][-1]
+		# See if this is a delete, an addition or an update
+		if params[:component_action] == "delete_param"
+			@component = ComponentDetail.find(params[:component_id])
+			x = params[:id][-1]
 
-		# Get the current value for the param
-		case x
-			when "1" 
-				curr_param = @component.component_param_1
-			when "2"
-				curr_param = @component.component_param_2
-			when "3"
-				curr_param = @component.component_param_3
-			when "4"
-				curr_param = @component.component_param_4
-			when "5"
-				curr_param = @component.component_param_5
-			when "6"
-				curr_param = @component.component_param_6
-			when "7"
-				curr_param = @component.component_param_7
-			when "8"
-				curr_param = @component.component_param_8
-			when "9"
-				curr_param = @component.component_param_9
-			when "10"
-				curr_param = @component.component_param_10
-		end
-
-		if params[:name].index('key')
-			new_param = params[:value] + ':' + curr_param.split(':')[1]
+			# Get the current value for the param
+			case x
+				when "1" 
+					@component.update(component_param_1: nil)
+				when "2"
+					@component.update(component_param_2: nil)
+				when "3"
+					@component.update(component_param_3: nil)
+				when "4"
+					@component.update(component_param_4: nil)
+				when "5"
+					@component.update(component_param_5: nil)
+				when "6"
+					@component.update(component_param_6: nil)
+				when "7"
+					@component.update(component_param_7: nil)
+				when "8"
+					@component.update(component_param_8: nil)
+				when "9"
+					@component.update(component_param_9: nil)
+				when "10"
+					@component.update(component_param_10: nil)
+			end
+		
 		else
-			new_param = curr_param.split(':')[0] + ':' + params[:value]
-		end
 
-		case x
-			when "1" 
-				@component.update(component_param_1: new_param)
-			when "2"
-				@component.update(component_param_2: new_param)
-			when "3"
-				@component.update(component_param_3: new_param)
-			when "4"
-				@component.update(component_param_4: new_param)
-			when "5"
-				@component.update(component_param_5: new_param)
-			when "6"
-				@component.update(component_param_6: new_param)
-			when "7"
-				@component.update(component_param_7: new_param)
-			when "8"
-				@component.update(component_param_8: new_param)
-			when "9"
-				@component.update(component_param_9: new_param)
-			when "10"
-				@component.update(component_param_10: new_param)
-		end
+			@component = ComponentDetail.find(params[:id])
+			x = params[:name][-1]
 
+			# Get the current value for the param
+			case x
+				when "1" 
+					curr_param = @component.component_param_1
+				when "2"
+					curr_param = @component.component_param_2
+				when "3"
+					curr_param = @component.component_param_3
+				when "4"
+					curr_param = @component.component_param_4
+				when "5"
+					curr_param = @component.component_param_5
+				when "6"
+					curr_param = @component.component_param_6
+				when "7"
+					curr_param = @component.component_param_7
+				when "8"
+					curr_param = @component.component_param_8
+				when "9"
+					curr_param = @component.component_param_9
+				when "10"
+					curr_param = @component.component_param_10
+			end
+
+			if params[:name].index('key')
+				if curr_param[-1] == ':'
+					new_param = params[:value] + ':'
+				else				
+					new_param = params[:value] + ':' + curr_param.split(':')[1]
+				end
+			else
+				new_param = curr_param.split(':')[0] + ':' + params[:value]
+			end
+
+			case x
+				when "1" 
+					@component.update(component_param_1: new_param)
+				when "2"
+					@component.update(component_param_2: new_param)
+				when "3"
+					@component.update(component_param_3: new_param)
+				when "4"
+					@component.update(component_param_4: new_param)
+				when "5"
+					@component.update(component_param_5: new_param)
+				when "6"
+					@component.update(component_param_6: new_param)
+				when "7"
+					@component.update(component_param_7: new_param)
+				when "8"
+					@component.update(component_param_8: new_param)
+				when "9"
+					@component.update(component_param_9: new_param)
+				when "10"
+					@component.update(component_param_10: new_param)
+			end
+		end
 		render json: :ok
 	end
 
 	def update
-
 		@component = ComponentDetail.find(params[:id])
-		x = 0
-		while x <= params[:param_keys].count - 1
-			case x
-				when 0
-					@component.component_param_1 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 1
-					@component.component_param_2 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 2
-					@component.component_param_3 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 3
-					@component.component_param_4 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 4
-					@component.component_param_5 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 5
-					@component.component_param_6 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 6
-					@component.component_param_7 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 7
-					@component.component_param_8 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 8
-					@component.component_param_9 = params[:param_keys][x] + ':' + params[:param_values][x]
-				when 9	
-					@component.component_param_10 = params[:param_keys][x] + ':' + params[:param_values][x]
+		if params[:ind] == nil
+			x = 0
+			while x <= params[:param_keys].count - 1
+				case x
+					when 0
+						@component.component_param_1 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 1
+						@component.component_param_2 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 2
+						@component.component_param_3 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 3
+						@component.component_param_4 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 4
+						@component.component_param_5 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 5
+						@component.component_param_6 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 6
+						@component.component_param_7 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 7
+						@component.component_param_8 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 8
+						@component.component_param_9 = params[:param_keys][x] + ':' + params[:param_values][x]
+					when 9	
+						@component.component_param_10 = params[:param_keys][x] + ':' + params[:param_values][x]
+				end
+				x += 1
 			end
-			x += 1
+			@component.save
+			flash[:success] = "Your parameters have been added to the [ #{@component.component_name} ] component."
+			redirect_to controller: :components, action: :index and return
+		else
+			if params[:param_keys][0] != ""
+				case params[:ind].to_i
+					when 1
+						@component.component_param_1 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 2
+						@component.component_param_2 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 3
+						@component.component_param_3 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 4
+						@component.component_param_4 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 5
+						@component.component_param_5 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 6
+						@component.component_param_6 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 7
+						@component.component_param_7 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 8
+						@component.component_param_8 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 9
+						@component.component_param_9 = params[:param_keys][0] + ':' + params[:param_values][0]
+					when 10	
+						@component.component_param_10 = params[:param_keys][0] + ':' + params[:param_values][0]
+				end
+				@component.save
+				flash[:success] = "Your parameters have been added to the [ #{@component.component_name} ] component."
+				redirect_to component_path(@component.component_name)
+			else
+				flash[:error] = "Please enter a parameter key! Parameter values can be blank but not keys."
+				redirect_to add_param_path(@component.id)
+			end
 		end
-		@component.save
-		flash[:success] = "Your parameters have been added to the [ #{@component.component_name} ] component."
-		redirect_to controller: :components, action: :index and return
 	end
 
 	def destroy
