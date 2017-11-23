@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="row">        
+	  <div class="col-md-12">
+    	<div class="row">
+    		<div class="col-sm-7 col-sm-offset-2">
+					<%= form_tag test_case_path(@test_case), method: 'patch' do %>
+		    		<div class="panel panel-default">
+		  				<div class="panel-heading text-center"><strong>Test Case [ <%= @test_case.test_case_name %> ] - Add Status & Description</strong></div>
+	  					<div class="panel-body">
+		  					<div class="row">
+		  						<div class="col-sm-5">
+		  							<div class="btn-label">Status:</div>
+		  						</div>
+		  						<div class="col-sm-7">
+		  							<div class="btn-label">Description:</div>
+		  						</div>
+		  					</div>
+		  					<div class="row">
+		  						<div class="col-sm-5">
+		  							<%= select_tag "status", options_from_collection_for_select(TestCaseStatus.all, 'id', 'status'), class: 'btn btn-default' %>
+		  						</div>
+		  						<div class="col-sm-7">
+		  							<textarea class="form-control" id="description" name="description" rows="4" placeholder="Enter a test description..."></textarea>
+		  						</div>
+		  					</div>
+	  					</div>
+	  					<div class="panel-footer">
+	  						<div class="row">
+									<div class="col-md-12">
+										<span class="pull-left">			
+											<%= back_button("/test_cases/#{@test_case.test_case_name}") %>
+										</span>
+										<span class="pull-right">
+											<%= submit_tag 'Next', class: "btn btn-info" %>
+										</span>
+									</div>
+								</div>
+	  					</div>
+	  				</div>
+		      <% end %>
+	      </div>
+      </div>
+    </div>
+  </div>
+</div>      
+    		

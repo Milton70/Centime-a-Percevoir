@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :test_file_type do
+  factory :test_case_status do
     
   end
 end

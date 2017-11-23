@@ -20,6 +20,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # bcrypt so passwords are encrypted
 gem 'bcrypt', :require=>'bcrypt'
+# Use httparty for REST services
+gem 'httparty'
+
 
 # Styling, forms and wizzy stuff
 gem 'twitter-bootstrap-rails'
@@ -29,6 +32,7 @@ gem 'font-awesome-rails'
 gem 'ancestry'
 gem 'jstree-rails-4'
 gem 'bootstrap-x-editable-rails'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 
 group :development, :test do
   gem 'pry'

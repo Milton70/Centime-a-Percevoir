@@ -1,0 +1,58 @@
+<div class="container">    
+	<div class="col-md-12">
+	  <div class="panel panel-default">
+	    <div class="panel-heading">
+	      <div class="row">
+	        <div class="col col-md-6">
+	          <h3 class="panel-title">Test Case Maintenance</h3>
+	        </div>
+	      </div>
+	    </div>  
+	    <div class="panel-body">
+			  <table class="table table-striped table-bordered" id="new_edit_params">
+					<thead>
+						<tr>
+			        <th class="reduce">Action</th>
+			        <th class="reduce">Component Name</th>
+							<% x = 1 %>
+							<% while x <= @tot_num_params %>				            
+			        	<th class="reduce">Parameter_<%= x %></th>
+			        	<% x += 1 %>
+			        <% end %>
+						</tr> 
+					</thead>
+					<tbody>
+						<% @components.each do |comp| %>						
+							<tr>
+								<td class="text-center">
+									<i onclick='delete_component_from_test("<%= @test_case.id %>","<%= comp[0] %>");' class='fa fa-trash btn btn-danger btn-xs' 
+										title='Delete Component from Test'>
+									</i>
+									<i onclick='edit_component_params_in_test("<%= @test_case.id %>","<%= comp[0] %>");' class='fa fa-pencil btn btn-warning btn-xs' 
+										title='Edit Parameters on this Component'>
+									</i>
+								</td>				
+								<td><%= comp[0] %></td>
+								<% x = 1 %>
+								<% comp[1].each do |ele| %>
+									<td><%= ele %></td>
+									<% x += 1 %>
+								<% end %>
+								<% while x <= @tot_num_params %>
+									<td>&nbsp;</td>
+									<% x += 1 %>
+								<% end %>
+							</tr>
+						<% end %>
+				  </tbody>
+				</table>
+			</div>
+			<div class="panel-footer">
+				<div class="row">
+					<div class="col-md-2">
+						<%= back_button('Test Planning') %>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>

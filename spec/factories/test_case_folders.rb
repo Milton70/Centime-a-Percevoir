@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :test_file_mqmd do
+  factory :test_case_folder do
     
   end
 end

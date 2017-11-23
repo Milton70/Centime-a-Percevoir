@@ -1,0 +1,24 @@
+<title>
+	Administer Test Cases
+</title>
+
+<div class="container">    
+	<div class="col-md-10 col-md-offset-1">
+	  <div class="panel panel-default panel-table">
+	    <div class="panel-heading">
+	      <div class="row">
+	        <div class="col col-xs-6">
+	          <h3 class="panel-title">Test Case Planning</h3>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="panel-body">
+	      <div id="tc_folders"> 	
+	      	<ul>
+	      		<%= build_test_tree_view(@root_folder, '') %>
+	      	</ul>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</div>

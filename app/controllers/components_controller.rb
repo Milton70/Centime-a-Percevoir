@@ -52,7 +52,7 @@ class ComponentsController < ApplicationController
 
 	def add_param
 		@component = ComponentDetail.find(params[:id])
-		@param = ComponentDetail.return_next_available_parameter(@component)	
+		@next_param = ComponentDetail.return_next_available_parameter(@component)	
 	end
 
 	def edit_param
@@ -82,7 +82,7 @@ class ComponentsController < ApplicationController
 					@component.update(component_param_8: nil)
 				when "9"
 					@component.update(component_param_9: nil)
-				when "10"
+				when "0"
 					@component.update(component_param_10: nil)
 			end
 		
@@ -111,7 +111,7 @@ class ComponentsController < ApplicationController
 					curr_param = @component.component_param_8
 				when "9"
 					curr_param = @component.component_param_9
-				when "10"
+				when "0"
 					curr_param = @component.component_param_10
 			end
 
@@ -180,6 +180,7 @@ class ComponentsController < ApplicationController
 				end
 				x += 1
 			end
+
 			@component.save
 			flash[:success] = "Your parameters have been added to the [ #{@component.component_name} ] component."
 			redirect_to controller: :components, action: :index and return
@@ -207,6 +208,7 @@ class ComponentsController < ApplicationController
 					when 10	
 						@component.component_param_10 = params[:param_keys][0] + ':' + params[:param_values][0]
 				end
+		
 				@component.save
 				flash[:success] = "Your parameters have been added to the [ #{@component.component_name} ] component."
 				redirect_to component_path(@component.component_name)
@@ -239,7 +241,7 @@ class ComponentsController < ApplicationController
 				obj.destroy
 			else
 				obj.children.each do |child|	
-					# Work around the children and component details, if any have a test_case_id not nil, then can't delete
+					# Work around the children and component details, if any have a test case not nil, then can't delete
 					rc = ComponentFolder.if_folder_has_sub_folder_check_linked_components(child, "")		
 					if rc != ""
 						flash[:error] = "Sorry but component(s) [#{rc}] are linked to test cases. You cannot delete components that are linked to test cases. All non-linked components (and folders) have been deleted."

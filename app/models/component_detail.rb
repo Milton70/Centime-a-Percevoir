@@ -1,9 +1,26 @@
 class ComponentDetail < ActiveRecord::Base
 	belongs_to :component_folder
-	belongs_to :test_case
+	has_many :test_assignments
+	has_many :test_cases, through: :test_assignments
+
+	def self.return_component_ids(comp_names)
+		rtn = []
+		comp_names.split(',').each do |comp|
+			rtn.push(self.find_by(component_name: comp).id)
+		end
+		return rtn
+	end
+
+	def self.return_component_details_from_test(this_test)
+		rtn = []
+		this_test.test_assignments.each do |ele|
+			rtn.push(self.find(ele.component_detail_id))
+		end		
+		return rtn
+	end
 
 	def self.does_component_have_linked_test_case(component)
-		if component.test_case_id != nil && component.test_case_id != ""
+		if component.test_assignments != nil && component.test_assignments != []
 			return true
 		else
 			return false
@@ -11,6 +28,7 @@ class ComponentDetail < ActiveRecord::Base
 	end
 
 	def self.return_next_available_parameter(component)
+
 		x = 1
 		while x <= 10			
 			case x

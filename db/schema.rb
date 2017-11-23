@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102112334) do
+ActiveRecord::Schema.define(version: 20171123174541) do
 
   create_table "assignments", force: :cascade do |t|
     t.integer  "user_id"
@@ -39,11 +39,9 @@ ActiveRecord::Schema.define(version: 20171102112334) do
     t.string   "component_param_10"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.integer  "test_case_id"
   end
 
   add_index "component_details", ["component_folder_id"], name: "index_component_details_on_component_folder_id"
-  add_index "component_details", ["test_case_id"], name: "index_component_details_on_test_case_id"
 
   create_table "component_folders", force: :cascade do |t|
     t.string   "folder_name"
@@ -61,15 +59,53 @@ ActiveRecord::Schema.define(version: 20171102112334) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "test_cases", force: :cascade do |t|
-    t.integer  "test_execution_id"
-    t.string   "test_case_id"
-    t.string   "test_behaviour_id"
-    t.string   "test_component_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+  create_table "test_assignments", force: :cascade do |t|
+    t.integer  "test_case_id"
+    t.integer  "component_detail_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.string   "param_1"
+    t.string   "param_2"
+    t.string   "param_3"
+    t.string   "param_4"
+    t.string   "param_5"
+    t.string   "param_6"
+    t.string   "param_7"
+    t.string   "param_8"
+    t.string   "param_9"
+    t.string   "param_10"
   end
 
+  add_index "test_assignments", ["component_detail_id"], name: "index_test_assignments_on_component_detail_id"
+  add_index "test_assignments", ["test_case_id"], name: "index_test_assignments_on_test_case_id"
+
+  create_table "test_case_folders", force: :cascade do |t|
+    t.string   "folder_name"
+    t.string   "folder_description"
+    t.string   "ancestry"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "test_case_folders", ["ancestry"], name: "index_test_case_folders_on_ancestry"
+
+  create_table "test_case_statuses", force: :cascade do |t|
+    t.string   "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "test_cases", force: :cascade do |t|
+    t.integer  "test_execution_id"
+    t.string   "test_case_name"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.integer  "test_case_folder_id"
+    t.string   "status"
+    t.string   "description"
+  end
+
+  add_index "test_cases", ["test_case_folder_id"], name: "index_test_cases_on_test_case_folder_id"
   add_index "test_cases", ["test_execution_id"], name: "index_test_cases_on_test_execution_id"
 
   create_table "test_data", force: :cascade do |t|
@@ -123,25 +159,21 @@ ActiveRecord::Schema.define(version: 20171102112334) do
     t.string   "test_data_id"
     t.string   "test_env_id"
     t.string   "test_case_desc"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "test_scenario_name"
   end
 
-  create_table "test_file_mqmds", force: :cascade do |t|
-    t.string   "file_type"
+  create_table "test_file_extras", force: :cascade do |t|
+    t.string   "test_file_type"
+    t.string   "mq_in_q_name"
     t.string   "bankGroupId"
     t.string   "bankName"
     t.string   "fileName"
     t.string   "exchangeConditionExternalId"
+    t.string   "file_location"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
-  end
-
-  create_table "test_file_types", force: :cascade do |t|
-    t.string   "test_file_type"
-    t.string   "mq_in_q_name"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
   end
 
   create_table "test_files", force: :cascade do |t|

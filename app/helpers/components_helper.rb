@@ -1,6 +1,6 @@
 module ComponentsHelper
 
-	def build_tree_view(root, html)
+	def build_component_tree_view(root, html)
 		folder 		= "data-jstree='{\"icon\":\"fa fa-folder-open-o\"}'"
 		html = ''
 		root = ComponentFolder.find(1)
@@ -8,7 +8,7 @@ module ComponentsHelper
 		root.children.each do |kid|
 			html << "<ul>"
 			html << "<li #{folder}>#{kid.folder_name}"
-			html << write_children(kid, folder)
+			html << write_component_children(kid, folder)
 			html << '</li>'
 			html << '</ul>'	
 		end
@@ -16,7 +16,7 @@ module ComponentsHelper
 		return html.html_safe
 	end
 
-	def write_children(kid, folder)
+	def write_component_children(kid, folder)
 		html = ''
 		if kid.has_children?
 			kid.children.each do |child|		
@@ -24,7 +24,7 @@ module ComponentsHelper
 				html << "<li #{folder}>#{child.folder_name}"			
 				html << write_components(child)
 				if child.has_children?
-					html << write_children(child, folder)
+					html << write_component_children(child, folder)
 					html << "</li></ul>"
 				else
 					html << "</li></ul>"
@@ -121,7 +121,5 @@ module ComponentsHelper
 		end
 		return html.html_safe
 	end
-
-
 
 end

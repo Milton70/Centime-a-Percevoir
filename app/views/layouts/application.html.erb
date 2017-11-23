@@ -24,8 +24,8 @@
 				<% if session[:permission] != nil && session[:permission][0] == 1 %>
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Test Planning</a></li>
-							<li><a href="#">Test Execution</a></li>
+							<li data-turbolinks="false"><%= link_to "Test Planning", test_cases_path %></li>
+							<li data-turbolinks="false"><%= link_to "Test Execution", test_executions_path %></li>
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Results <b class="caret"></b></a>
 								<ul class="dropdown-menu">

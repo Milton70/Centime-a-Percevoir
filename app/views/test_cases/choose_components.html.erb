@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="row">        
+	  <div class="col-md-12">
+    	<div class="row">
+    		<div class="col-sm-7 col-sm-offset-2">
+					<%= form_tag test_case_path(@test_case), method: 'patch' do %>
+		    		<div class="panel panel-default">
+		  				<div class="panel-heading text-center"><strong>Test Case [ <%= @test_case.test_case_name %> ]</strong></div>
+		  				<div class="panel-heading text-center">
+		  					Select Components
+		  					<span class="affix">
+		  						<%= submit_tag 'Commit', class: "btn btn-success" %>
+		  					</span>
+		  				</div>
+		  				<div class="panel-body fixed-panel">
+		  	  			<div id="comp_chk_folders"> 	
+	      					<ul>
+	      						<%= build_component_tree_view(@root_folder, '') %>
+	      					</ul>
+	      				</div>
+		        	</div>
+		        </div>
+		      <% end %>
+	      </div>
+      </div>
+    </div>
+  </div>
+</div>      
+    		

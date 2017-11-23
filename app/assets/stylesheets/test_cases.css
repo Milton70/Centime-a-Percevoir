@@ -1,0 +1,11 @@
+.reduce {
+	font-size: 80%;
+}
+
+.table-responsive > .fixed-columns-fixed {
+  position: absolute;
+  display: inline-block;
+  width: auto;
+  border-right: 2px solid #ddd;
+  background-color: #fff;
+}
